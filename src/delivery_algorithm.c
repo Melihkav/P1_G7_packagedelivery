@@ -26,6 +26,27 @@ void add_node_to_tree(node_t *new_node, node_t *tree_root) {
     }
 }
 
+int check_in_tree (node_t *node, tree_t tree) {
+    node_t *target_node = tree.root;
+
+    if (tree.root == NULL) {
+        return 0;
+    }
+
+    while (node != NULL) {
+        if (node->f >= target_node->f) {
+            target_node = target_node->right;
+        } else {
+            target_node = target_node->left;
+        }
+        if (target_node == node) {
+            return 1;
+        }
+    }
+
+    return 0;
+}
+
 // A* algorithm
 void a_star(graph_t *graph, node_t start_node, node_t end_node) {
     tree_t unvisited_nodes = {&start_node};
